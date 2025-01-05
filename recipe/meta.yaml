@@ -6,24 +6,24 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/napari-dexp-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/napari-dexp-{{ version }}.tar.gz
   sha256: 134318fb3ec29d460350148a187be8e2c89f817a2391e79ef1afe38992b11925
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.7
+    - python {{ python_min }}
     - setuptools-scm
   run:
     - dexp
     - napari-plugin-engine >=0.1.4
     - numpy
-    - python >=3.7
+    - python >={{ python_min }}
     - napari
 
 test:
@@ -35,6 +35,7 @@ test:
   requires:
     - pip
     - oclgrind
+    - python {{ python_min }}
 
 about:
   home: https://github.com/royerlab/napari-dexp
